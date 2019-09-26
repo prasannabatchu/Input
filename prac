@@ -1,0 +1,731 @@
+https://www.codementor.io/sheena/essential-python-interview-questions-du107ozr6
+
+https://www.geeksforgeeks.org/commonly-asked-data-structure-interview-questions-set-1/
+https://www.edureka.co/blog/interview-questions/python-interview-questions/
+https://www.sanfoundry.com/python-questions-answers-advanced-formatting/
+
+https://www.w3resource.com/python-exercises/data-structures-and-algorithms/python-data-structure.php
+
+https://medium.com/velotio-perspectives/an-introduction-to-asynchronous-programming-in-python-af0189a88bbb  #Threading
+https://www.guru99.com/python-multithreading-gil-example.html
+
+https://stackabuse.com/introduction-to-pythons-collections-module/
+
+https://www.cs.auckland.ac.nz/courses/compsci105ssc/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf #ALgorithms and DS
+http://home.ustc.edu.cn/~huang83/ds/Data%20Structures%20and%20Algorithms%20Using%20Python.pdf
+https://www.guru99.com/difference-between-abstraction-and-encapsulation.html  ******Surely checkout this
+https://docs.python.org/3/faq/design.html   ******Surely checkout this
+https://medium.com/datadriveninvestor/how-does-memory-allocation-work-in-python-and-other-languages-d2d8a9398543       ******Surely checkout this
+https://www.guru99.com/python-multithreading-gil-example.html#6 
+
+=====================
+name mangling. It is to avoid the overriding of the variable in subclasses.
+##Double Pre Underscores
+class Sample():
+
+    def __init__(self):
+        self.a = 1
+        self._b = 2
+        self.__c = 3
+obj1 = Sample()
+print (dir(obj1))
+print(obj1._Sample__c)
+output:  ['_Sample__c', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_b', 'a']
+		3
+self.a variable appears in the list without any change.
+
+self._b Variable also appears in the list without any change. As we discussed above, it's just for the internal use.
+
+Is there self.__c variable in the list?
+
+If you carefully look at the attributes list, you will find an attribute called _Sample__c. This is the name mangling. It is to avoid the overriding of the variable in subclasses.
+================
+class MyClass:
+    def __init__(self):
+        self._name = "Prasanna"
+        self.__surname = "Batchu"
+mc = MyClass()
+print mc._name     
+#print mc.__surname    
+print mc.__dict__
+
+======================================
+DATA ABSTRACTION VS ENCAPSULATION
+Data abstraction refers to providing only essential information about the data to the outside world, hiding the background details or implementation.where as
+data encapsulation is one of the fundamentals of OOP (object-oriented programming). It refers to the bundling of data with the methods that operate on that data.
+ Encapsulation is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
+Abstraction and Encapsulation are two important Object Oriented Programming (OOPS) concepts. Encapsulation and Abstraction both are interrelated terms.
+REAL LIFE DIFFERENCE BETWEEN ENCAPSULATION AND ABSTRACTION is that Encapsulate means to hide. Encapsulation is also called data hiding.
+You can think Encapsulation like a capsule (medicine tablet) which hides medicine inside it. Encapsulation is wrapping, just hiding properties and methods.
+ Encapsulation is used for hide the code and data in a single unit to protect the data from the outside the world. Class is the best example of encapsulation. where as Abstraction refers to showing only the necessary details to the intended user. As the name suggests, abstraction is the "abstract form of anything". We use abstraction in programming languages to make abstract class. Abstract class represents abstract view of methods and properties of class.
+There is also a Implementation Difference Between Encapsulation and Abstraction.Abstraction is implemented using interface and abstract class while Encapsulation is implemented using private and protected access modifier.
+OOPS makes use of encapsulation to enforce the integrity of a type (i.e. to make sure data is used in an appropriate manner) by preventing programmers from accessing data in a non-intended manner. Through encapsulation, only a predetermined group of functions can access the data. The collective term for datatypes and operations (methods) bundled together with access restrictions (public/private, etc.) is a class.
+
+#Abstraction
+class Sample(ABC):
+    @abstractmethod
+    def sample(self):
+        pass
+
+
+class ATM():
+    def add(self):
+        pass
+    def sub(self):
+        pass
+    def money(self):
+        pass
+
+class Sample(ATM):
+    def add(self):
+        print ("logic add")
+
+#Encapsulation
+class MySample():
+    def __init__(self,a=0,b=0):
+        self.a = a
+        self.b = b
+        self.__message = "Addition Result Is "
+    def add(self):
+        c = str(self.a+self.b)
+        return c
+
+
+ob = MySample(a = 5,b = 5)
+print (ob.a)
+print (ob.b)
+ob.message = "Subtraction Result "
+print ()
+print (ob.add())
+print (ob.__dict__)
+======================================================
+How memory is managed in Python?
+
+Python memory is managed by Python private heap space. All Python objects and data structures are located in a private heap. 
+The programmer does not have an access to this private heap and interpreter takes care of this Python private heap.
+The allocation of Python heap space for Python objects is done by Python memory manager. The core API gives access to some tools for the programmer to code.
+Python also have an inbuilt garbage collector, which recycle all the unused memory and frees the memory and makes it available to the heap space.
+=================================================
+In Python 3, print(*(range(x)) is equivalent to print(" ".join([str(i) for i in range(x)]))
+====================================
+repr() compute the “official” string representation of an object (a representation that has all information about the abject) 
+and str() is used to compute the “informal” string representation of an object (a representation that is useful for printing the object).
+=======================================
+import sqlite3
+conn = sqlite3.connect('test_db.db')
+crsr =conn.cursor()
+sql_cmd = """CREATE TABLE emp1 (fname VARCHAR(20), lname VARCHAR(30));"""
+crsr.execute(sql_cmd)
+sql_cmd = """INSERT INTO emp1 VALUES ('prasanna','batchu');"""
+sql_cmd = """INSERT INTO emp1 VALUES ('prasanna','batchu');"""
+crsr.execute(sql_cmd)
+crsr.execute("SELECT * FROM emp1")
+
+# store all the fetched data in the ans variable
+ans = crsr.fetchall()
+
+# loop to print all the data
+for i in ans:
+    print(i)
+conn.commit()
+
+conn.close()
+========================================
+s = "liril"
+# s ="prasanna"
+def palindrome(s):
+    left,right=0,len(s)-1
+    if right>=left:
+        if not s[left]==s[right]:
+            print (s[left] == s[right])
+            return False
+        left+=1;right-=1
+        print(right, left)
+        return True
+        # print (s)
+
+print (palindrome(s))
+-===================================
+self : self represents the instance of the class. By using the "self" keyword we can access the attributes and methods of the class in python
+==================
+LAMBDAS ARE COMMONLY USED WITH THE FOLLOWING PYTHON BUILT-INS:
+Filter: filter (lambda parameter: expression, iterable-sequence)
+Map: map (lambda parameter: expression, iterable-sequences)
+Reduce: reduce (lambda parameter1, parameter2: expression, iterable-sequence)
+=======================================================================
+The map() function calls the specified function for each item of an iterable (such as string, list, tuple or dictionary) and returns a list of results.
+numbers=[1, 2, 3, 4, 5] 
+sqrList=map(square, numbers))
+
+The map() function in Python takes in a function and a list as argument. The function is called with a lambda function and a list and a new list is returned which contains all the lambda modified items returned by that
+function for each item. Example:
+
+# Python code to illustrate  map() with lambda()  to get double of a list. 
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61] 
+final_list = list(map(lambda x: x*2 , li)) 
+print(final_list) 
+Output:
+
+[10, 14, 44, 194, 108, 124, 154, 46, 146, 122]
+===========================================
+
+The reduce() function is defined in the functools module. Like the map and filter functions, the reduce() function receives two arguments, a function and an iterable.
+However, it doesn't return another iterable, instead it returns a single value.
+The reduce() function in Python takes in a function and a list as argument. The function is called with a lambda function and a list and a new reduced result is returned/
+ This performs a repetitive operation over the pairs of the list. This is a part of functools module. 
+ Example:
+# Python code to illustrate  reduce() with lambda()  to get sum of a list 
+from functools import reduce
+li = [5, 8, 10, 20, 50, 100] 
+sum = reduce((lambda x, y: x + y), li) 
+print (sum) 
+Output:
+
+193
+===========================
+
+The filter() function in Python takes in a function and a list as arguments. 
+This offers an elegant way to filter out all the elements of a sequence “sequence”, for which the function returns True. Here is a small program that returns the odd numbers from an input list:
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61] 
+final_list = list(filter(lambda x: (x%2 != 0) , li)) 
+print(final_list) 
+Output:
+
+[5, 7, 97, 77, 23, 73, 61]
+==========================
+Lambdas, also known as anonymous functions, are small, restricted functions which do not need a name (i.e., an identifier).
+Every lambda function in Python has 3 essential parts:
+The lambda keyword.
+The parameters (or bound variables), and
+The function body.
+The syntax for writing a lambda is: lambda parameter: expression
+Lambdas can have any number of parameters, but they are not enclosed in braces
+A lambda can have only 1 expression in its function body, which is returned by default.
+At the bytecode level, there is not much difference between how lambdas and regular functions are handled by the interpreter.
+Lambdas support IIFE thru this syntax: (lambda parameter: expression)(argument)
+===============================
+
+
+def square_list(n):
+    the_list = []                         # Replace
+    for x in range(n):
+        y = x * x
+        the_list.append(y)                # these
+    print the_list
+square_list(15)
+
+
+def squares_all_of_them():
+    x = 0
+    while True:
+        yield x * x
+        x += 1
+
+squares = squares_all_of_them()
+for _ in range(4):
+    print(next(squares))
+
+
+b = 'abbbbccdddda'
+import itertools
+for i,j in itertools.groupby(b):
+    print i,len(list(j))
+
+
+ls = [1,2,3,4,5,6,7,8,9]
+print ls.reverse()
+ls.reverse()
+print ls
+
+dict = {'a':4,'b':45,'c':2,'d':30}
+print sorted([(value,key) for (key,value) in dict.items()])
+
+
+x = {'a': 1, 'b': 2}
+y = {'b': 3, 'c': 4}
+z= x.copy()
+z.update(y)
+print z
+
+
+booklist = [
+  {
+    "author": "Chinua Achebe",
+    "country": "Nigeria",
+    "imageLink": "images/things-fall-apart.jpg",
+    "language": "English",
+    "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart\n",
+    "pages": 209,
+    "title": "Things Fall Apart",
+    "year": 1958
+  },
+
+   {
+    "author": "Joe Jackson",
+    "country": "USA",
+    "imageLink": "images/white_socks.jpg",
+    "language": "English",
+    "link": "https://en.wikipedia.org/wiki/white_sox",
+    "pages": 500,
+    "title": "My Shoes Hurt My Feet",
+    "year": 1919
+  }]
+#authors = [a['author'] for a in booklist]
+#print authors
+
+for b in booklist:
+    if b['author'] == 'Joe Jackson':
+        print (b)
+
+
+mylist = ['butter', 'jam', 'curd'] #Convert a List to String
+myStr = ', '.join(mylist)
+print myStr
+
+
+def square_list(n):
+    the_list = []                         # Replace
+    for x in range(n):
+        y = x * x
+        the_list.append(y)                # these
+    print the_list     
+square_list(15) 
+
+
+def squares_all_of_them():
+    x = 0
+    while True:
+        yield x * x
+        x += 1
+       
+squares = squares_all_of_them()
+for _ in range(4):
+    print(next(squares))
+
+
+b = 'abbbbccdddda'
+import itertools
+for i,j in itertools.groupby(b):
+    print i,len(list(j))
+
+
+ls = [1,2,3,4,5,6,7,8,9]
+print ls.reverse()
+ls.reverse()
+print ls
+
+dict = {'a':4,'b':45,'c':2,'d':30}
+print sorted([(value,key) for (key,value) in dict.items()])        
+
+
+x = {'a': 1, 'b': 2}
+y = {'b': 3, 'c': 4}
+z= x.copy()
+z.update(y)
+print z
+
+
+booklist = [
+  {
+    "author": "Chinua Achebe",
+    "country": "Nigeria",
+    "imageLink": "images/things-fall-apart.jpg",
+    "language": "English",
+    "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart\n",
+    "pages": 209,
+    "title": "Things Fall Apart",
+    "year": 1958
+  },
+
+   {
+    "author": "Joe Jackson",
+    "country": "USA",
+    "imageLink": "images/white_socks.jpg",
+    "language": "English",
+    "link": "https://en.wikipedia.org/wiki/white_sox",
+    "pages": 500,
+    "title": "My Shoes Hurt My Feet",
+    "year": 1919
+  }]
+#authors = [a['author'] for a in booklist]
+#print authors
+
+for b in booklist:
+    if b['author'] == 'Joe Jackson':
+        print (b)
+        
+a = [['Robert'], ['Tommy'], ['Joe'], ['Will']]
+dict = {}
+for i,j in enumerate(a):
+    dict[i]=j
+    print dict
+    
+    
+dct = {} 
+for i in range(len(a)):
+    dct['Name'] = a
+print dct  
+    
+        
+li = ["man","nut","bag","rat","cat","dog","fog","cat","man"]        
+dict = {}
+for i,j in enumerate(li):
+    if j not in dict: 
+        dict[j]=i
+print dict    
+
+
+#fibonacci
+a=0,
+b=1
+li = []
+def fibno(a,b):
+    for i in range(10):
+        a,b=b,a+b
+        #print a
+        li.append(a)
+    print li  
+
+fibno(0,1)  
+
+--------------------------------------------
+GENERATORS are functions that can be paused and resumed on the fly, returning an object that can be iterated over.
+ Unlike lists, they are lazy and thus produce items one at a time and only when asked. So they are much more memory efficient when dealing with large datasets
+ 
+ HTTPS://REALPYTHON.COM/INTRODUCTION-TO-PYTHON-GENERATORS/
+ 
+
+---------------------------------------------------------------
+DECORATORS are very powerful and useful tool in Python since it allows programmers to modify the behavior of function or class.
+ Decorators allow us to wrap another function in order to extend the behavior of wrapped function, without permanently modifying it.
+ 
+import math,time
+def calculate_time(func):
+    def get_time(*args,**kwargs):
+
+        stime = time.time()
+        func(*args,**kwargs)
+        etime = time.time()
+        print ("total time:",func.__name__,stime-etime)
+
+    return  get_time()
+@calculate_time
+def factorial(num):
+    print math.factorial(num)
+
+factorial(10)
+-----------------------------------
+@property Decorator
+@property decorator is a built-in decorator in Python for the property() function.
+
+The following code uses the built-in @property decorator to define the name property in the person class.
+
+Example: @property decorator
+class person:
+    def __init__(self):
+        self.__name=''
+    @property
+    def name(self):
+        return self.__name
+    @name.setter
+    def name(self, value):
+        self.__name=value
+The above person class includes two methods with the same name name(), but with a different number of parameters. This is called method overloading.
+The name(self) function is marked with the @property decorator which indicates that the name(self) method is a getter method and the name of the property is the method name only, in this case name.
+Now, name(self, value) is assigning a value to the private attribute __name. So, to mark this method as a setter method for the name property, the @name.setter decorator is applied. 
+This is how we can define a property and its getter and setter methods.
+
+Now, we can access the name property without calling the getter or setter method manually, as shown below.
+
+>>> p=person()
+>>> p.name='Steve' 
+>>> p.name 
+Steve
+==================================================================
+
+ 
+WRAPPED FUNCTION - function with a set of common behaviors.
+
+---------------------------------------------------------------
+MEMOIZATION is a technique of recording the intermediate results so that it can be used to avoid repeated calculations and speed up the programs.
+ It can be used to optimize the programs that use recursion. In Python, memoization can be done with the help of function decorators.
+
+def memoize_factorial(f):
+	memory = {}
+	def inner(num):
+		if num not in memory:	 
+			print("g ")
+			memory[num] = f(num)
+		return memory[num]
+	return inner
+	
+@memoize_factorial
+def calculate_factorial(num):
+	if num == 1:
+		return 1
+	else:
+		return num * calculate_factorial(num-1)
+
+print(calculate_factorial(5))
+----------------------------------------------------------------- 
+
+ OOPS++++++++++++++++++++++++++++++++++++
+
+Class
+Here we can take Human Being as a class. A class is a blueprint for any functional entity which defines its properties and its functions.
+ Like Human Being, having body parts, and performing various actions.
+
+	CLASSES ARE COLLECTION OF VARIABLES, AND FUNCTIONS, THAT ARE BOUND TOGETHER.
+
+
+Inheritance
+Considering HumanBeing a class, which has properties like hands, legs, eyes etc, and functions like walk, talk, eat, see etc.
+Male and Female are also classes, but most of the properties and functions are included in HumanBeing, hence they can inherit everything from class HumanBeing using the concept of Inheritance.
+
+Objects
+My name is Abhishek, and I am an instance/object of class Male. When we say, Human Being, Male or Female, we just mean a kind, you, your friend, me we are the forms of these classes.
+ We have a physical existence while a class is just a logical definition. We are the objects.
+ 
+	OBJECTS ARE INSTANCES OF CLASS, WHICH HOLDS THE DATA VARIABLES DECLARED IN THE CLASS AND THE MEMBER FUNCTIONS WORK ON THESE CLASS OBJECTS.
+
+
+Abstraction
+Abstraction means, showcasing only the required things to the outside world while hiding the details.
+Continuing our example, Human Being's can talk, walk, hear, eat, but the details are hidden from the outside world. We can take our skin as the Abstraction factor in our case, hiding the inside mechanism.
+
+Encapsulation
+This concept is a little tricky to explain with our example. Our Legs are binded to help us walk. Our hands, help us hold things. This binding of the properties to functions is called Encapsulation.
+
+Polymorphism
+Polymorphism is a concept, which allows us to redefine the way something works, by either changing how it is done or by changing the parts using which it is done. Both the ways have different terms for them.
+https://python-intro.readthedocs.io/en/latest/polymorphism.html
+https://www.studytonight.com/python/oops-basics-python
+
+class Animal:
+    def __init__(self, name):    # Constructor of the class
+        self.name = name
+    def talk(self):              # Abstract method, defined by convention only
+        raise NotImplementedError("Subclass must implement abstract method")
+
+class Cat(Animal):
+    def talk(self):
+        return 'Meow!'
+
+class Dog(Animal):
+    def talk(self):
+        return 'Woof! Woof!'
+
+animals = [Cat('Missy'), Cat('Mr. Mistoffelees'),Dog('Lassie')]
+for animal in animals:
+    print animal.name + ': ' + animal.talk()
+
+# prints the following:
+#
+# Missy: Meow!
+# Mr. Mistoffelees: Meow!
+# Lassie: Woof! Woof!
+
+
+=====================================
+
+Like DESTRUCTOR is counter-part of a CONSTRUCTOR, function __del__ is the counter-part of function __new__. Because __new__ is the function which creates the object.
+__del__ method is called for any object when the reference count for that object becomes zero.
+As reference counting is performed, hence it is not necessary that for an object __del__ method will be called if it goes out of scope. The destructor method will only be called when the reference count becomes zero
+
+
+
+The FINALLY block is always executed, so it is generally used for doing the concluding tasks like closing file resources or closing database connection or may be ending the program execution with a delightful message.
+
+
+
+https://www.tutorialspoint.com/What-is-the-difference-between-session-and-cookies
+
+
+WITHOUT USING LAMBDA : Here, both of them returns the cube of a given number. But, while using def,we needed to define a function with a name cube and needed to pass a value to it.
+ After execution, we also needed to return the result from where the function was called using the return keyword.
+ 
+USING LAMBDA : Lambda definition does not include a “return” statement, it always contains an expression which is returned.
+ We can also put a lambda definition anywhere a function is expected, and we don’t have to assign it to a variable at all. This is the simplicity of lambda functions.
+ 
+ FILTER() :
+ 
+ The filter() function in Python takes in a function and a list as arguments. This offers an elegant way to filter out all the elements of a sequence “sequence”, for which the function returns True.
+ Here is a small program that returns the odd numbers from an input list:
+
+# Python code to illustrate 
+# filter() with lambda() 
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61] 
+final_list = list(filter(lambda x: (x%2 != 0) , li)) 
+print(final_list) 
+Output:
+
+[5, 7, 97, 77, 23, 73, 61]
+
+USE OF LAMBDA() WITH MAP():
+
+The map() function in Python takes in a function and a list as argument. The function is called with a lambda function and a list and a new list is returned which contains all the lambda 
+modified items returned by that function for each item. 
+
+# Python code to illustrate  
+# map() with lambda()  
+# to get double of a list. 
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61] 
+final_list = list(map(lambda x: x*2 , li)) 
+print(final_list) 
+Output:    [10, 14, 44, 194, 108, 124, 154, 46, 146, 122]
+
+
+USE OF LAMBDA() WITH REDUCE()
+
+The reduce() function in Python takes in a function and a list as argument. The function is called with a lambda function and a list and a new reduced result is returned.
+ This performs a repetitive operation over the pairs of the list. This is a part of functools module. Example:
+
+# Python code to illustrate  
+# reduce() with lambda() 
+# to get sum of a list 
+from functools import reduce
+li = [5, 8, 10, 20, 50, 100] 
+sum = reduce((lambda x, y: x + y), li) 
+print (sum) 
+Output:   193
+
+
+self(): self represents the instance of the class. By using the “self” keyword we can access the attributes and methods of the class in python. It binds the attributes with the given arguments
+
+
+--------------------------------------
+testdata=[{'Associate ID': [u'103', u'138', u'129']}, {'Associate Name': [u'DAYAL BABU', u'VENKATESHWAR REDDY P', u'BADRINATH']},{'Associate Job': ['a','b','c']},{'Associate Sal': ['10000','20000','30000']}, ]
+newlist = []
+for count,j in enumerate(testdata):
+    for k,v in j.items():
+        #print k,v
+        for c,val in enumerate(v):
+            if count==0:
+                newlist.append({k: val})
+            else:
+                print ">>>"
+                newlist[c].update({k:val})
+print newlist
+-----------------------------------------------------------
+MONKEY PATCHING: Dynamic modifications of a class/module at run time
+
+Ex:
+
+#monkeypatchingex.py
+class MEx:
+	def f1:
+		print ('Monkey patching ex')
+	
+import monkeypatchingex
+def f2:
+	print ('This shuld print')
+			
+monkeypatchingex.MEx.f1()=f2
+obj= MEx()
+MEx.f1()
+
+Output : This shuld print
+
+=-------------------
+The BREAK statement stops the execution of the current loop. and transfers control to the next block.
+ The CONTINUE statement ends the current block’s execution and jumps to the next iteration of the loop.
+ 
+-----------------------------------
+import time
+from threading import Thread
+import thread
+from thread import start_new_thread
+
+def time_it(func):
+    def time_chk(*args, **kwargs):
+        sTime = time.time()
+        func(*args, **kwargs)
+        eTime = time.time()
+        print ("done in {0}".format(eTime - sTime))
+
+    return time_chk
+
+@time_it
+def make_square():
+    for i in range(10):
+        print (pow(i, 2))
+        print("\n")
+        time.sleep(1)
+
+@time_it
+def make_cube():
+    for i in range(10):
+        print (pow(i, 3))
+        print("\n")
+        time.sleep(1)
+@time_it
+def main():
+    t1 = Thread(target=make_square)
+    t2 = Thread(target=make_cube)
+    t1.daemon = True
+    t2.daemon = True
+    t1.start()
+    t2.start()
+    time.sleep(3)
+    # t1.join()
+    # t2.join()
+main()
+print ("main is done")
+============================================
+All variables which are assigned a value in class declaration are CLASS VARIABLES. And variables which are assigned values inside class methods are INSTANCE VARIABLES.
+
+=================================================================================
+A CLASS METHOD takes cls as first parameter while a static method needs no specific parameters.
+A class method can access or modify class state while a STATIC METHOD can’t access or modify it.
+In general, static methods know nothing about class state. They are utility type methods that take some parameters and work upon those parameters. On the other hand class methods must have class as parameter.
+We use @classmethod decorator in python to create a class method and we use @staticmethod decorator to create a static method in python.
+
+from datetime import date 
+  
+class Person: 
+    def __init__(self, name, age): 
+        self.name = name 
+        self.age = age 
+      
+    # a class method to create a Person object by birth year. 
+    @classmethod
+    def fromBirthYear(cls, name, year): 
+        return cls(name, date.today().year - year) 
+      
+    # a static method to check if a Person is adult or not. 
+    @staticmethod
+    def isAdult(age): 
+        return age > 18
+  
+person1 = Person('mayank', 21) 
+person2 = Person.fromBirthYear('mayank', 1996) 
+  
+print person1.age 
+print person2.age 
+  
+# print the result 
+print Person.isAdult(22) 
+===================================
+Ways to sort list of dictionaries by values in Python – Using LAMBDA FUNCTION and ITEMGETTER
+from operator import itemgetter
+lis = [{ "name" : "Nandini", "age" : 20}, { "name" : "Manjeet", "age" : 20 }, { "name" : "Nikhil" , "age" : 19 }] 
+print sorted(lis, key=itemgetter('age')) 
+print sorted(lis,key=lambda i:i['age'])
+=========================================
+TWO MAJOR DIFFERENCES BETWEEN THE ARRAY AND THE LIST:
+While python lists can contain values corresponding to different data types, arrays in python can only contain values corresponding to same data type
+ First, an array has a limited number of
+operations, which commonly include those for array creation, reading a value from
+a specific element, and writing a value to a specific element. The list, on the other
+hand, provides a large number of operations for working with the contents of the
+list. Second, the list can grow and shrink during execution as elements are added
+or removed while the size of an array cannot be changed after it has been created.Arrays need to be declared whereas lists do not need declaration because they are a part of Python's syntax
+===================================
+DATA STRUCTURES
+
+Algorithm : An Algorithm is step by step set of instruction to process the data for a specific purpose
+
+An ABSTRACT DATA TYPE (or ADT) is a programmer-defined data type that specifies a set of data values and a collection of well-defined operations that can be
+performed on those values
+
+All DATA STRUCTURES store a collection of values,but differ in how they organize the individual data items and by what operations can be applied to manage the collection
