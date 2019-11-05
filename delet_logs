@@ -23,3 +23,17 @@ class RotateSystemLogsAndDumps:
 
 obj = RotateSystemLogsAndDumps()
 obj.delete_required_logs()
+
+
+import wmi
+import os 
+import win32serviceutil
+
+
+
+service_name = ['this is service one  :)'
+                ,'service 2'
+                ,'service 1 million'
+                ]
+for s in service_name:
+    win32serviceutil.StopService(s)
