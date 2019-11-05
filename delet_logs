@@ -1,0 +1,25 @@
+import os
+import glob
+
+class RotateSystemLogsAndDumps:
+    def delete_required_logs(self):
+        src = 'D:\Program Files\IBM\WebSphere\AppServer\profiles'.replace('\\','/')
+        listOfFiles = glob.glob(src + '/*/*/nodeagent/*')
+        for e in listOfFiles:
+            # print (e)
+            bname_sys = os.path.basename(e)
+            if bname_sys.startswith('SystemOut'):
+               os.remove(e)
+
+        listOfOtherFiles = glob.glob(src + '/WSNode01-DEV/*')
+        for f in listOfOtherFiles:
+            bname = os.path.basename(f)
+            if bname.startswith('core') and bname.endswith('dmp'):
+                os.remove(f)
+            if bname.startswith('heap') and bname.endswith('dmp'):
+                os.remove(f)
+            if bname.startswith('java') and bname.endswith('dmp'):
+                os.remove(f)
+
+obj = RotateSystemLogsAndDumps()
+obj.delete_required_logs()
